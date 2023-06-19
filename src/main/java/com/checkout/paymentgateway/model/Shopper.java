@@ -13,4 +13,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Shopper extends BaseEntity{
+    private String name;
+    private Card card;
 }
