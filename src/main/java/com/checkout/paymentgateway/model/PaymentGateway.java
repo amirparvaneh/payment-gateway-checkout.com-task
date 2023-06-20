@@ -13,4 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PaymentGateway extends BaseEntity{
+    private Long shopperId;
+    private Merchant merchant;
+
 }

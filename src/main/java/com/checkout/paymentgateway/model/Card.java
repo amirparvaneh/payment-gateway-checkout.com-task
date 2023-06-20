@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "card")
 @Data
@@ -15,5 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Card extends BaseEntity{
     private String cvv;
-    private Long shopperId;
+    private Date expireDate;
+
+    private AcquiringBank acquiringBank;
 }

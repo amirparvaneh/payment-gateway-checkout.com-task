@@ -16,4 +16,6 @@ public class AcquiringBank extends BaseEntity{
     private String name;
     private String bankCode;
     private Long paymentGateway;
+    @OneToMany()
+    private Long cardId;
 }
