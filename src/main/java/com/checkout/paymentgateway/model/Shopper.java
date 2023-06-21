@@ -20,4 +20,6 @@ public class Shopper extends BaseEntity{
     private String name;
     @OneToMany(mappedBy = "shopper")
     private List<Card> card;
+    @OneToMany(mappedBy = "shopper")
+    private List<Order> orders;
 }
