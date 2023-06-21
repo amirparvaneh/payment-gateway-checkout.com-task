@@ -18,6 +18,6 @@ import java.util.Date;
 public class Card extends BaseEntity{
     private String cvv;
     private Date expireDate;
+    private Long acquiringId;
 
-    private AcquiringBank acquiringBank;
 }

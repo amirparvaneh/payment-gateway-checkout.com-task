@@ -14,5 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Order extends BaseEntity{
-    private
+    private String description;
+    private Long price;
+    private Long shopperId;
+    private Long merchantId;
 }
