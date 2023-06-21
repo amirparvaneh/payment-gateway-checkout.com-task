@@ -1,8 +1,6 @@
 package com.checkout.paymentgateway.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +16,8 @@ public class AcquiringBank extends BaseEntity{
 
     private String name;
     private String bankCode;
-    private Long paymentGateway;
+    @ManyToOne
+    @JoinColumn(name = "payment_gateway_id")
+    private PaymentGateway paymentGateway;
 
 }

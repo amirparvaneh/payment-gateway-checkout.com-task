@@ -1,6 +1,8 @@
 package com.checkout.paymentgateway.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +18,10 @@ import lombok.NoArgsConstructor;
 public class Order extends BaseEntity{
     private String description;
     private Long price;
-    private Long shopperId;
-    private Long merchantId;
+    @ManyToOne
+    @JoinColumn(name = "shopper_id")
+    private Shopper shopper;
+    @ManyToOne
+    @JoinColumn(name = "merchant_id")
+    private Merchant merchant;
 }
