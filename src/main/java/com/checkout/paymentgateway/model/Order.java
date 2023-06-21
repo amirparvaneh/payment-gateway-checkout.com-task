@@ -15,7 +15,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Order extends BaseEntity{
+public class Order extends BaseEntity {
+
+    private String product;
     private String description;
     private Long price;
     @ManyToOne
@@ -24,4 +26,5 @@ public class Order extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "merchant_id")
     private Merchant merchant;
+
 }

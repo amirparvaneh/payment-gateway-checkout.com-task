@@ -1,16 +1,14 @@
 package com.checkout.paymentgateway.dto;
 
 
-import lombok.AllArgsConstructor;
+import com.checkout.paymentgateway.model.Order;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class PaymentRequestDto implements Serializable {
+    private Order order;
 }
