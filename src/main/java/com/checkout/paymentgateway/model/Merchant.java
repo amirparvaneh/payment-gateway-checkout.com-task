@@ -16,10 +16,10 @@ import java.util.List;
 public class Merchant extends BaseEntity{
 
     private String name;
-//    @OneToMany(mappedBy = "merchant")
-//    private List<Order> orders;
-//    @ManyToOne
-//    @JoinColumn(name = "payment_gateway_id")
-//    private PaymentGateway paymentGateway;
+    @OneToMany(mappedBy = "merchant")
+    private List<Request> requests;
+    @ManyToOne
+    @JoinColumn(name = "payment_gateway_id")
+    private PaymentGateway paymentGateway;
 
 }
