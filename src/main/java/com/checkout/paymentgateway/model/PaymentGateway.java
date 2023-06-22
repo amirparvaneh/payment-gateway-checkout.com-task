@@ -10,18 +10,17 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "payment-gateway")
+@Table(name = "paymentGateway")
 @NoArgsConstructor
 @AllArgsConstructor
 public class PaymentGateway extends BaseEntity{
-
-    @OneToMany(mappedBy = "paymentGateway")
-    private List<Order> orders;
-    @OneToMany(mappedBy = "paymentGateway")
-    private List<Merchant> merchants;
-    @OneToMany(mappedBy = "paymentGateway")
-    private List<Shopper> shoppers;
-    @OneToMany
-    private List<AcquiringBank> acquiringBanks;
-
+    private String name;
+//    @OneToMany(mappedBy = "paymentGateway")
+//    private List<Order> orders;
+//    @OneToMany(mappedBy = "paymentGateway")
+//    private List<Merchant> merchants;
+//    @OneToMany(mappedBy = "paymentGateway")
+//    private List<Shopper> shoppers;
+//    @OneToMany(mappedBy = "paymentGateway")
+//    private List<AcquiringBank> acquiringBanks;
 }

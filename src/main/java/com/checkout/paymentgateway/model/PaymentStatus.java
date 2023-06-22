@@ -3,5 +3,5 @@ package com.checkout.paymentgateway.model;
 public enum PaymentStatus {
     FAIL,
     SUCCESS,
-    INPROCESS
+    InPROCESS
 }

@@ -20,8 +20,11 @@ import java.util.Date;
 public class Card extends BaseEntity{
     private String cvv;
     private Date expireDate;
-    @ManyToOne
-    @JoinColumn(name = "acquiring_bank_id")
-    private AcquiringBank acquiringBank;
+//    @ManyToOne
+//    @JoinColumn(name = "acquiring_bank_id")
+//    private AcquiringBank acquiringBank;
+//    @ManyToOne
+//    @JoinColumn(name = "shopper_id")
+//    private Shopper shopper;
 
 }
