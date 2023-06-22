@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AcquiringBankRepo extends JpaRepository<AcquiringBank, Long> {
+    AcquiringBank findAcquiringBankByName(String bankName);
 }

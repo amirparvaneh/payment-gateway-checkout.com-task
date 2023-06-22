@@ -1,6 +1,7 @@
 package com.checkout.paymentgateway.service.impl;
 
 import com.checkout.paymentgateway.model.AcquiringBank;
+import com.checkout.paymentgateway.repository.AcquiringBankRepo;
 import com.checkout.paymentgateway.service.AcquiringBankService;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +11,15 @@ import java.util.Optional;
 @Service
 public class AcquiringBankServiceImpl implements AcquiringBankService {
 
+    private final AcquiringBankRepo acquiringBankRepo;
+
+    public AcquiringBankServiceImpl(AcquiringBankRepo acquiringBankRepo){
+        this.acquiringBankRepo = acquiringBankRepo;
+    }
+
     @Override
     public void save(AcquiringBank acquiringBank) {
-
+        acquiringBankRepo.save(acquiringBank);
     }
 
     @Override
@@ -38,5 +45,9 @@ public class AcquiringBankServiceImpl implements AcquiringBankService {
     @Override
     public AcquiringBank findById(Long id) {
         return null;
+    }
+
+    public AcquiringBank findByName(String bankName){
+        return acquiringBankRepo.findAcquiringBankByName(bankName);
     }
 }

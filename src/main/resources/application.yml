@@ -19,9 +19,7 @@ server:
   servlet:
     context-path: /ipg
 
-springdoc:
-  swagger-ui:
-    path: /swagger-ui.html
+
 #
 #eureka:
 #  client:
