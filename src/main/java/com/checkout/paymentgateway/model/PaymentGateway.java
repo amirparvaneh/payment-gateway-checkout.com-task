@@ -15,12 +15,12 @@ import java.util.List;
 @AllArgsConstructor
 public class PaymentGateway extends BaseEntity{
     private String name;
-//    @OneToMany(mappedBy = "paymentGateway")
-//    private List<Order> orders;
+    @OneToMany(mappedBy = "paymentGateway")
+    private List<Request> requests;
 //    @OneToMany(mappedBy = "paymentGateway")
 //    private List<Merchant> merchants;
 //    @OneToMany(mappedBy = "paymentGateway")
 //    private List<Shopper> shoppers;
-//    @OneToMany(mappedBy = "paymentGateway")
-//    private List<AcquiringBank> acquiringBanks;
+    @OneToMany(mappedBy = "paymentGateway")
+    private List<AcquiringBank> acquiringBanks;
 }

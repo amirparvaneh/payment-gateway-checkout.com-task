@@ -16,8 +16,8 @@ public class AcquiringBank extends BaseEntity{
 
     private String name;
     private String bankCode;
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "payment_gateway_id")
-//    private PaymentGateway paymentGateway;
+    @ManyToOne
+    @JoinColumn(name = "payment_gateway_id")
+    private PaymentGateway paymentGateway;
 
 }
