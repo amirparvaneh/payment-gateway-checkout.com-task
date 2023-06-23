@@ -6,5 +6,5 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(name = "/order")
-public class OrderController {
+public class RequestController {
 }

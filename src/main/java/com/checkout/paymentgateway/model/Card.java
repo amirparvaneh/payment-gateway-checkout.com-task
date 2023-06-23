@@ -4,6 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +20,11 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Card extends BaseEntity{
+public class Card extends BaseEntity {
+
+    @NotNull
+    @Digits(integer = 4, fraction = 0, message = "the card number should be 4 digits ! ")
+    private Long cardNumber;
     private String cvv;
     private Date expireDate;
     @ManyToOne

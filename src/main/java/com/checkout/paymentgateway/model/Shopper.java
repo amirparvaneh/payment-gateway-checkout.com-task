@@ -3,6 +3,7 @@ package com.checkout.paymentgateway.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Table(name = "shopper")
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Shopper extends BaseEntity{
 
     private String name;
