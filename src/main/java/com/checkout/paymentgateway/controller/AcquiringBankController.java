@@ -1,6 +1,7 @@
 package com.checkout.paymentgateway.controller;
 
 
+import com.checkout.paymentgateway.dto.AcquiringBankNewDto;
 import com.checkout.paymentgateway.model.AcquiringBank;
 import com.checkout.paymentgateway.service.impl.AcquiringBankServiceImpl;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +21,8 @@ public class AcquiringBankController {
     }
 
     @PostMapping
-    public ResponseEntity<String> addNewAcquiringBank(@RequestBody AcquiringBank acquiringBank) {
-        acquiringBankService.save(acquiringBank);
+    public ResponseEntity<String> addNewAcquiringBank(@RequestBody AcquiringBankNewDto acquiringBank) {
+
         return ResponseEntity.ok().build();
     }
 
