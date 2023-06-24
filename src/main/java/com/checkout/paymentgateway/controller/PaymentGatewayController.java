@@ -1,6 +1,7 @@
 package com.checkout.paymentgateway.controller;
 
 import com.checkout.paymentgateway.dto.PaymentGateWayNewDto;
+import com.checkout.paymentgateway.dto.UpdatePaymentGatewayDto;
 import com.checkout.paymentgateway.exception.PaymentException;
 import com.checkout.paymentgateway.model.PaymentGateway;
 import com.checkout.paymentgateway.service.impl.PaymentGatewayServiceImpl;
@@ -38,5 +39,13 @@ public class PaymentGatewayController {
                 .build();
         paymentGatewayService.save(paymentGateway);
         return ResponseEntity.ok(paymentGateway.getName() + "created!");
+    }
+
+    @PutMapping
+    public ResponseEntity<String> updatePaymentGateway(@RequestParam Long id,
+                                                       @RequestBody UpdatePaymentGatewayDto updatePaymentGatewayDto){
+
+      paymentGatewayService.updatePaymentByDto(id,updatePaymentGatewayDto);
+      return ResponseEntity.ok("payment gateway with this id : " +"id " + " updated!" );
     }
 }
