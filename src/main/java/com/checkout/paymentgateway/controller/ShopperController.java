@@ -2,18 +2,17 @@ package com.checkout.paymentgateway.controller;
 
 
 import com.checkout.paymentgateway.dto.ShopperNewDto;
+import com.checkout.paymentgateway.exception.PaymentException;
 import com.checkout.paymentgateway.model.Card;
 import com.checkout.paymentgateway.model.Shopper;
 import com.checkout.paymentgateway.service.impl.CardServiceImpl;
 import com.checkout.paymentgateway.service.impl.ShopperServiceImpl;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -29,7 +28,7 @@ public class ShopperController {
     }
 
 
-    @GetMapping
+    @PostMapping
     public ResponseEntity<String> saveNewShopper(@RequestBody ShopperNewDto shopperNewDto) {
         List<Card> shopperCardList = new ArrayList<>();
         Optional<Card> card = Optional.ofNullable(cardService.findCardByCardNumber(shopperNewDto.getCardNumber()));
@@ -39,5 +38,26 @@ public class ShopperController {
                 .card(shopperCardList)
                 .build();
         return ResponseEntity.ok("the shopper : " + shopper.getName() + "added !");
+    }
+
+    @GetMapping
+    public ResponseEntity<Shopper> getShopperById(@RequestParam Long shopperId) {
+        Optional<Shopper> shopper = Optional.ofNullable(shopperService.findById(shopperId));
+        return ResponseEntity.ok(shopper.orElse(null));
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Shopper>> getAllShopper() throws PaymentException {
+        List<Shopper> resultShopperList = shopperService.findAll();
+        if (Objects.isNull(resultShopperList)) {
+            throw new PaymentException("there is no shopper now!");
+        }
+        return ResponseEntity.ok(resultShopperList);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteShopper(@RequestParam Long id) {
+        shopperService.delete(id);
+        return ResponseEntity.ok("shopper id : " + "deleted!");
     }
 }
