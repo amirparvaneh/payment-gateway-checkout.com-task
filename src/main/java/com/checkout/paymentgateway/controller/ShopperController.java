@@ -2,6 +2,7 @@ package com.checkout.paymentgateway.controller;
 
 
 import com.checkout.paymentgateway.dto.ShopperNewDto;
+import com.checkout.paymentgateway.dto.ShopperUpdateDto;
 import com.checkout.paymentgateway.exception.PaymentException;
 import com.checkout.paymentgateway.model.Card;
 import com.checkout.paymentgateway.model.Shopper;
@@ -53,6 +54,12 @@ public class ShopperController {
             throw new PaymentException("there is no shopper now!");
         }
         return ResponseEntity.ok(resultShopperList);
+    }
+
+    @PutMapping
+    public ResponseEntity<String> updateShopper(@RequestBody ShopperUpdateDto shopperUpdateDto) throws PaymentException {
+        shopperService.updateByDto(shopperUpdateDto);
+        return ResponseEntity.ok("update!");
     }
 
     @DeleteMapping
