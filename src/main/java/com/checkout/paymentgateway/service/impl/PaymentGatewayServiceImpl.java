@@ -1,6 +1,7 @@
 package com.checkout.paymentgateway.service.impl;
 
 import com.checkout.paymentgateway.dto.UpdatePaymentGatewayDto;
+import com.checkout.paymentgateway.exception.PaymentException;
 import com.checkout.paymentgateway.model.PaymentGateway;
 import com.checkout.paymentgateway.repository.PaymentGatewayRepo;
 import com.checkout.paymentgateway.service.PaymentGatewayService;
@@ -24,7 +25,12 @@ public class PaymentGatewayServiceImpl implements PaymentGatewayService {
     }
 
     @Override
-    public String delete(Long id) {
+    public String delete(Long id) throws PaymentException {
+        Optional<PaymentGateway> paymentGateway = Optional.ofNullable(paymentGatewayRepo.findPaymentGatewayById(id));
+        if (paymentGateway.isPresent()){
+            paymentGatewayRepo.delete(paymentGateway.get());
+        }else
+            throw new PaymentException("not fount");
         return null;
     }
 

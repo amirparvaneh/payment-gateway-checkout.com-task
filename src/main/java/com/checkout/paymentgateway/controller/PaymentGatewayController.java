@@ -48,4 +48,10 @@ public class PaymentGatewayController {
       paymentGatewayService.updatePaymentByDto(id,updatePaymentGatewayDto);
       return ResponseEntity.ok("payment gateway with this id : " +"id " + " updated!" );
     }
+
+    @DeleteMapping
+    public ResponseEntity<String> deletePaymentGateway(@RequestParam Long paymentGatewayId) throws PaymentException {
+        paymentGatewayService.delete(paymentGatewayId);
+        return ResponseEntity.ok("deleted");
+    }
 }
