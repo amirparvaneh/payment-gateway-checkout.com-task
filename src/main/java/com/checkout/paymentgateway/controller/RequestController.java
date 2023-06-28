@@ -2,6 +2,7 @@ package com.checkout.paymentgateway.controller;
 
 
 import com.checkout.paymentgateway.dto.RequestCreationDto;
+import com.checkout.paymentgateway.exception.PaymentException;
 import com.checkout.paymentgateway.model.Merchant;
 import com.checkout.paymentgateway.model.PaymentGateway;
 import com.checkout.paymentgateway.model.Request;
@@ -11,10 +12,9 @@ import com.checkout.paymentgateway.service.impl.PaymentGatewayServiceImpl;
 import com.checkout.paymentgateway.service.impl.RequestServiceImpl;
 import com.checkout.paymentgateway.service.impl.ShopperServiceImpl;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping(name = "/order")
@@ -48,6 +48,25 @@ public class RequestController {
                 .build();
         requestService.save(request);
         return ResponseEntity.ok(request);
+    }
+
+    @GetMapping
+    public ResponseEntity<Request> getRequest(@RequestParam Long requestId){
+        Optional<Request> request = Optional.ofNullable(requestService.findById(requestId));
+        return ResponseEntity.ok(request.orElse(null));
+    }
+
+
+    @GetMapping("/shopperId")
+    public ResponseEntity<Request> getRequestByShopperId(@RequestParam Long shopperId) throws PaymentException {
+        Optional<Request> shopperRequest = Optional.ofNullable(requestService.findShoppersRequest(shopperId));
+        return ResponseEntity.ok(shopperRequest.orElse(null));
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteRequest(@RequestParam Long requestId){
+        requestService.delete(requestId);
+        return ResponseEntity.ok("deleted!");
     }
 
 }
