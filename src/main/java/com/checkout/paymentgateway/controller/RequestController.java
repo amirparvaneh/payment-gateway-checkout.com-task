@@ -55,4 +55,18 @@ public class RequestController {
         Optional<Request> request = Optional.ofNullable(requestService.findById(requestId));
         return ResponseEntity.ok(request.orElse(null));
     }
+
+
+    @GetMapping("/shopperId")
+    public ResponseEntity<Request> getRequestByShopperId(@RequestParam Long shopperId) throws PaymentException {
+        Optional<Request> shopperRequest = Optional.ofNullable(requestService.findShoppersRequest(shopperId));
+        return ResponseEntity.ok(shopperRequest.orElse(null));
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteRequest(@RequestParam Long requestId){
+        requestService.delete(requestId);
+        return ResponseEntity.ok("deleted!");
+    }
+
 }
