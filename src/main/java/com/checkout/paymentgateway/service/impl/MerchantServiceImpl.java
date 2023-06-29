@@ -20,8 +20,8 @@ public class MerchantServiceImpl implements MerchantService {
     }
 
     @Override
-    public Optional<Merchant> update(Long id, Merchant merchant) {
-        return Optional.empty();
+    public void update(Long id, Merchant merchant) {
+
     }
 
     @Override

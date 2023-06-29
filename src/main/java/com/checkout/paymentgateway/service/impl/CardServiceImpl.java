@@ -28,8 +28,8 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public Optional<Card> update(Long id, Card card) {
-        return Optional.empty();
+    public void update(Long id, Card card) {
+
     }
 
     @Override

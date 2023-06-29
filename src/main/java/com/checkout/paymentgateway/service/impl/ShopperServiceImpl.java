@@ -31,8 +31,7 @@ public class ShopperServiceImpl implements ShopperService {
     }
 
     @Override
-    public Optional<Shopper> update(Long id, Shopper shopper) {
-        return Optional.empty();
+    public void update(Long id, Shopper shopper) {
     }
 
     @Override
