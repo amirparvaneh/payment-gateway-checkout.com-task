@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping(name = "/bank")
+@RequestMapping(value = "/bank")
 public class AcquiringBankController {
 
     private final AcquiringBankServiceImpl acquiringBankService;

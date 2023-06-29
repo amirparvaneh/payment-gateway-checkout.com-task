@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(name = "/order")
+@RequestMapping(value = "/order")
 public class RequestController {
 
     private final RequestServiceImpl requestService;

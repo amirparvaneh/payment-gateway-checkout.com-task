@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(name = "/gateway")
+@RequestMapping(value = "/gateway")
 public class PaymentGatewayController {
 
     private final PaymentGatewayServiceImpl paymentGatewayService;
