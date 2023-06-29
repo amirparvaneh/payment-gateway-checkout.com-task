@@ -10,11 +10,11 @@ public interface BaseService<T> {
 
     String delete(Long id) throws PaymentException;
 
-    Optional<T> update(Long id, T t);
+    void update(Long id, T t) throws PaymentException;
 
     List<T> findAll();
 
     void deleteById(Long id);
 
-    T findById(Long id);
+    T findById(Long id) throws PaymentException;
 }

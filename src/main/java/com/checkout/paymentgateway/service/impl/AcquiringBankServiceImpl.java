@@ -1,9 +1,11 @@
 package com.checkout.paymentgateway.service.impl;
 
+import com.checkout.paymentgateway.exception.PaymentException;
 import com.checkout.paymentgateway.model.AcquiringBank;
 import com.checkout.paymentgateway.repository.AcquiringBankRepo;
 import com.checkout.paymentgateway.service.AcquiringBankService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,23 +30,32 @@ public class AcquiringBankServiceImpl implements AcquiringBankService {
     }
 
     @Override
-    public Optional<AcquiringBank> update(Long id, AcquiringBank acquiringBank) {
-        return Optional.empty();
+
+    public void update(Long bankId, AcquiringBank acquiringBank) throws PaymentException {
+        Optional<AcquiringBank> bank = acquiringBankRepo.findById(bankId);
+        if (bank.isEmpty()){
+            throw new PaymentException("not found");
+        }
+        acquiringBankRepo.save(bank.get());
     }
 
     @Override
     public List<AcquiringBank> findAll() {
-        return null;
+        return acquiringBankRepo.findAll();
     }
 
     @Override
-    public void deleteById(Long id) {
-
+    public void deleteById(Long bankId) {
+        acquiringBankRepo.deleteById(bankId);
     }
 
     @Override
-    public AcquiringBank findById(Long id) {
-        return null;
+    public AcquiringBank findById(Long bankId) throws PaymentException {
+       Optional<AcquiringBank> acquiringBank = acquiringBankRepo.findById(bankId);
+       if (acquiringBank.isEmpty()){
+           throw new PaymentException("not fount");
+       }
+       return acquiringBank.get();
     }
 
     public AcquiringBank findByName(String bankName){

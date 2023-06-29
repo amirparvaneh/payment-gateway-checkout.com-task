@@ -1,8 +1,8 @@
 package com.checkout.paymentgateway.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,10 +12,11 @@ import lombok.NoArgsConstructor;
 @Table(name = "acquiring_bank")
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class AcquiringBank extends BaseEntity{
 
     private String name;
-    private String bankCode;
+    private Long bankCode;
     @ManyToOne
     @JoinColumn(name = "payment_gateway_id")
     private PaymentGateway paymentGateway;
