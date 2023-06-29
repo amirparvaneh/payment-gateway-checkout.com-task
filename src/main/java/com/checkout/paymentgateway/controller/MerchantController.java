@@ -18,7 +18,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping(name = "/merchant")
+@RequestMapping(value = "/merchant")
 public class MerchantController {
 
     private final MerchantServiceImpl merchantService;

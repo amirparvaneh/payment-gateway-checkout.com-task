@@ -17,7 +17,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(name = "/shopper")
+@RequestMapping(value = "/shopper")
 public class ShopperController {
 
     private final ShopperServiceImpl shopperService;
