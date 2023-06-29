@@ -2,6 +2,7 @@ package com.checkout.paymentgateway.controller;
 
 
 import com.checkout.paymentgateway.dto.AcquiringBankNewDto;
+import com.checkout.paymentgateway.exception.PaymentException;
 import com.checkout.paymentgateway.model.AcquiringBank;
 import com.checkout.paymentgateway.service.impl.AcquiringBankServiceImpl;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,11 @@ public class AcquiringBankController {
 
     @PostMapping
     public ResponseEntity<String> addNewAcquiringBank(@RequestBody AcquiringBankNewDto acquiringBank) {
-
+        AcquiringBank newOne = AcquiringBank.builder()
+                .name(acquiringBank.getName())
+                .bankCode(acquiringBank.getBankCode())
+                .build();
+        acquiringBankService.save(newOne);
         return ResponseEntity.ok().build();
     }
 
@@ -40,7 +45,7 @@ public class AcquiringBankController {
     }
 
     @PutMapping
-    public ResponseEntity<String> updateBankName(@RequestParam Long id, @RequestParam String bankName) {
+    public ResponseEntity<String> updateBankName(@RequestParam Long id, @RequestParam String bankName) throws PaymentException {
         AcquiringBank acquiringBank = acquiringBankService.findById(id);
         if (Objects.nonNull(acquiringBank)) {
             acquiringBank.setName(bankName);

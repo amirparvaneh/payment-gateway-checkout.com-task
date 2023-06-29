@@ -35,8 +35,8 @@ public class PaymentGatewayServiceImpl implements PaymentGatewayService {
     }
 
     @Override
-    public Optional<PaymentGateway> update(Long id, PaymentGateway paymentGateway) {
-        return Optional.empty();
+    public void update(Long id, PaymentGateway paymentGateway) {
+
     }
 
     @Override
