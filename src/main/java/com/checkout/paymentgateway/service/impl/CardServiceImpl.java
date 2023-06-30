@@ -6,14 +6,13 @@ import com.checkout.paymentgateway.service.CardService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CardServiceImpl implements CardService {
 
     private final CardRepo cardRepo;
 
-    public CardServiceImpl(CardRepo cardRepo){
+    public CardServiceImpl(CardRepo cardRepo) {
         this.cardRepo = cardRepo;
     }
 
@@ -23,12 +22,12 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public String delete(Long id) {
-        return null;
+    public void delete(Long id) {
+
     }
 
     @Override
-    public void update(Long id, Card card) {
+    public void update(Card card) {
 
     }
 
@@ -37,10 +36,6 @@ public class CardServiceImpl implements CardService {
         return null;
     }
 
-    @Override
-    public void deleteById(Long id) {
-
-    }
 
     @Override
     public Card findById(Long id) {
@@ -48,7 +43,7 @@ public class CardServiceImpl implements CardService {
     }
 
 
-    public Card findCardByCardNumber(Long cardNumber){
+    public Card findCardByCardNumber(Long cardNumber) {
         return cardRepo.findCardByCardNumber(cardNumber);
     }
 }

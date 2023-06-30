@@ -16,7 +16,7 @@ public class ShopperServiceImpl implements ShopperService {
     private final ShopperRepo shopperRepo;
 
 
-    public ShopperServiceImpl(ShopperRepo shopperRepo){
+    public ShopperServiceImpl(ShopperRepo shopperRepo) {
         this.shopperRepo = shopperRepo;
     }
 
@@ -26,22 +26,16 @@ public class ShopperServiceImpl implements ShopperService {
     }
 
     @Override
-    public String delete(Long id) {
-        return null;
+    public void delete(Long id) {
     }
 
     @Override
-    public void update(Long id, Shopper shopper) {
+    public void update(Shopper shopper) {
     }
 
     @Override
     public List<Shopper> findAll() {
         return null;
-    }
-
-    @Override
-    public void deleteById(Long id) {
-
     }
 
     @Override
@@ -51,7 +45,7 @@ public class ShopperServiceImpl implements ShopperService {
 
     public Optional<Shopper> updateByDto(ShopperUpdateDto shopperUpdateDto) throws PaymentException {
         Optional<Shopper> shopper = shopperRepo.findById(shopperUpdateDto.getShopperId());
-        if (shopper.isEmpty()){
+        if (shopper.isEmpty()) {
             throw new PaymentException("not found");
         }
         shopper.get().setName(shopperUpdateDto.getName());

@@ -5,7 +5,6 @@ import com.checkout.paymentgateway.model.AcquiringBank;
 import com.checkout.paymentgateway.repository.AcquiringBankRepo;
 import com.checkout.paymentgateway.service.AcquiringBankService;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +14,7 @@ public class AcquiringBankServiceImpl implements AcquiringBankService {
 
     private final AcquiringBankRepo acquiringBankRepo;
 
-    public AcquiringBankServiceImpl(AcquiringBankRepo acquiringBankRepo){
+    public AcquiringBankServiceImpl(AcquiringBankRepo acquiringBankRepo) {
         this.acquiringBankRepo = acquiringBankRepo;
     }
 
@@ -25,15 +24,15 @@ public class AcquiringBankServiceImpl implements AcquiringBankService {
     }
 
     @Override
-    public String delete(Long id) {
-        return null;
+    public void delete(Long bankId) {
+        acquiringBankRepo.deleteById(bankId);
     }
 
     @Override
 
-    public void update(Long bankId, AcquiringBank acquiringBank) throws PaymentException {
+    public void update(AcquiringBank acquiringBank) throws PaymentException {
         Optional<AcquiringBank> bank = acquiringBankRepo.findById(bankId);
-        if (bank.isEmpty()){
+        if (bank.isEmpty()) {
             throw new PaymentException("not found");
         }
         acquiringBankRepo.save(bank.get());
@@ -44,21 +43,17 @@ public class AcquiringBankServiceImpl implements AcquiringBankService {
         return acquiringBankRepo.findAll();
     }
 
-    @Override
-    public void deleteById(Long bankId) {
-        acquiringBankRepo.deleteById(bankId);
-    }
 
     @Override
     public AcquiringBank findById(Long bankId) throws PaymentException {
-       Optional<AcquiringBank> acquiringBank = acquiringBankRepo.findById(bankId);
-       if (acquiringBank.isEmpty()){
-           throw new PaymentException("not fount");
-       }
-       return acquiringBank.get();
+        Optional<AcquiringBank> acquiringBank = acquiringBankRepo.findById(bankId);
+        if (acquiringBank.isEmpty()) {
+            throw new PaymentException("not fount");
+        }
+        return acquiringBank.get();
     }
 
-    public AcquiringBank findByName(String bankName){
+    public AcquiringBank findByName(String bankName) {
         return acquiringBankRepo.findAcquiringBankByName(bankName);
     }
 }

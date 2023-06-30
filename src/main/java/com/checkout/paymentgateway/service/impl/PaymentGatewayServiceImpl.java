@@ -21,33 +21,29 @@ public class PaymentGatewayServiceImpl implements PaymentGatewayService {
 
     @Override
     public void save(PaymentGateway paymentGateway) {
-
+        paymentGatewayRepo.save(paymentGateway);
     }
 
     @Override
-    public String delete(Long id) throws PaymentException {
+    public void delete(Long id) throws PaymentException {
         Optional<PaymentGateway> paymentGateway = Optional.ofNullable(paymentGatewayRepo.findPaymentGatewayById(id));
         if (paymentGateway.isPresent()){
             paymentGatewayRepo.delete(paymentGateway.get());
         }else
             throw new PaymentException("not fount");
-        return null;
     }
 
     @Override
-    public void update(Long id, PaymentGateway paymentGateway) {
-
+    public void update(PaymentGateway paymentGateway) {
+        paymentGatewayRepo.save(paymentGateway);
     }
 
     @Override
     public List<PaymentGateway> findAll() {
-        return null;
+        List<PaymentGateway> paymentGateways = paymentGatewayRepo.findAll();
+        return paymentGateways;
     }
 
-    @Override
-    public void deleteById(Long id) {
-
-    }
 
     @Override
     public PaymentGateway findById(Long id) {

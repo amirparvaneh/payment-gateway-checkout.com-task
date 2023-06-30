@@ -15,22 +15,23 @@ public class RequestServiceImpl implements RequestService {
     private final RequestRepo requestRepo;
 
 
-    public RequestServiceImpl(RequestRepo requestRepo){
+    public RequestServiceImpl(RequestRepo requestRepo) {
         this.requestRepo = requestRepo;
     }
 
     @Override
     public void save(Request request) {
-
+        requestRepo.save(request);
     }
 
     @Override
-    public String delete(Long id) {
-        return null;
+    public void delete(Long requestId) throws PaymentException {
+        validateRequestIdI(requestId);
+        requestRepo.deleteById(requestId);
     }
 
     @Override
-    public void update(Long id, Request request) {
+    public void update(Request request) {
 
     }
 
@@ -39,10 +40,6 @@ public class RequestServiceImpl implements RequestService {
         return null;
     }
 
-    @Override
-    public void deleteById(Long id) {
-
-    }
 
     @Override
     public Request findById(Long id) {
@@ -51,9 +48,16 @@ public class RequestServiceImpl implements RequestService {
 
     public Request findShoppersRequest(Long shopperId) throws PaymentException {
         Optional<Request> request = Optional.ofNullable(requestRepo.findRequestByShopper(shopperId));
-        if (request.isEmpty()){
+        if (request.isEmpty()) {
             throw new PaymentException("there is no request with this shopperID");
         }
         return request.get();
+    }
+
+    private void validateRequestIdI(Long requestId) throws PaymentException {
+        Optional<Request> request = requestRepo.findById(requestId);
+        if (request.isEmpty()){
+            throw new PaymentException("not found");
+        }
     }
 }

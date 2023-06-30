@@ -49,7 +49,7 @@ public class AcquiringBankController {
         AcquiringBank acquiringBank = acquiringBankService.findById(id);
         if (Objects.nonNull(acquiringBank)) {
             acquiringBank.setName(bankName);
-            acquiringBankService.update(id, acquiringBank);
+            acquiringBankService.update(acquiringBank);
         }
         return ResponseEntity.ok("bank" + id + "have been updated to : " + bankName);
     }
