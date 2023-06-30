@@ -1,4 +1,4 @@
-package com.checkout.paymentgateway.dto;
+package com.checkout.paymentgateway.dto.paymentGatewayDto;
 
 import com.checkout.paymentgateway.model.PaymentStatus;
 import lombok.AllArgsConstructor;

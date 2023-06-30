@@ -1,6 +1,6 @@
 package com.checkout.paymentgateway.service.impl;
 
-import com.checkout.paymentgateway.dto.ShopperUpdateDto;
+import com.checkout.paymentgateway.dto.shopperDto.ShopperUpdateDto;
 import com.checkout.paymentgateway.exception.PaymentException;
 import com.checkout.paymentgateway.model.Shopper;
 import com.checkout.paymentgateway.repository.ShopperRepo;
@@ -22,6 +22,7 @@ public class ShopperServiceImpl implements ShopperService {
 
     @Override
     public void save(Shopper shopper) {
+        shopperRepo.save(shopper);
 
     }
 

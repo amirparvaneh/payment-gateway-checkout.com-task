@@ -1,5 +1,6 @@
 package com.checkout.paymentgateway.service.impl;
 
+import com.checkout.paymentgateway.dto.bankDto.AcquiringBankUpdateDto;
 import com.checkout.paymentgateway.exception.PaymentException;
 import com.checkout.paymentgateway.model.AcquiringBank;
 import com.checkout.paymentgateway.repository.AcquiringBankRepo;
@@ -32,6 +33,13 @@ public class AcquiringBankServiceImpl implements AcquiringBankService {
 
     public void update(AcquiringBank acquiringBank) throws PaymentException {
         Optional<AcquiringBank> bank = acquiringBankRepo.findById(bankId);
+        if (bank.isEmpty()) {
+            throw new PaymentException("not found");
+        }
+        acquiringBankRepo.save(bank.get());
+    }
+    public void updateByDto(AcquiringBankUpdateDto acquiringBankUpdateDto) throws PaymentException {
+        Optional<AcquiringBank> bank = acquiringBankRepo.findById(acquiringBankUpdateDto.getBankId());
         if (bank.isEmpty()) {
             throw new PaymentException("not found");
         }
