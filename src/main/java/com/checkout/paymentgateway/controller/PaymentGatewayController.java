@@ -1,7 +1,7 @@
 package com.checkout.paymentgateway.controller;
 
-import com.checkout.paymentgateway.dto.PaymentGateWayNewDto;
-import com.checkout.paymentgateway.dto.UpdatePaymentGatewayDto;
+import com.checkout.paymentgateway.dto.paymentGatewayDto.PaymentGateWayNewDto;
+import com.checkout.paymentgateway.dto.paymentGatewayDto.UpdatePaymentGatewayDto;
 import com.checkout.paymentgateway.exception.PaymentException;
 import com.checkout.paymentgateway.model.PaymentGateway;
 import com.checkout.paymentgateway.service.impl.PaymentGatewayServiceImpl;

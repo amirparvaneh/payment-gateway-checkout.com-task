@@ -1,7 +1,8 @@
 package com.checkout.paymentgateway.controller;
 
 
-import com.checkout.paymentgateway.dto.AcquiringBankNewDto;
+import com.checkout.paymentgateway.dto.bankDto.AcquiringBankNewDto;
+import com.checkout.paymentgateway.dto.bankDto.AcquiringBankUpdateDto;
 import com.checkout.paymentgateway.exception.PaymentException;
 import com.checkout.paymentgateway.model.AcquiringBank;
 import com.checkout.paymentgateway.service.impl.AcquiringBankServiceImpl;
@@ -45,13 +46,15 @@ public class AcquiringBankController {
     }
 
     @PutMapping
-    public ResponseEntity<String> updateBankName(@RequestParam Long id, @RequestParam String bankName) throws PaymentException {
-        AcquiringBank acquiringBank = acquiringBankService.findById(id);
+    public ResponseEntity<String> updateBank(@RequestBody AcquiringBankUpdateDto acquiringBankUpdateDto)
+            throws PaymentException {
+        AcquiringBank acquiringBank = acquiringBankService.findById(acquiringBankUpdateDto.);
         if (Objects.nonNull(acquiringBank)) {
-            acquiringBank.setName(bankName);
-            acquiringBankService.update(acquiringBank);
+            acquiringBank.setName(acquiringBankUpdateDto.getBankName());
+            acquiringBankService.updateByDto();
         }
-        return ResponseEntity.ok("bank" + id + "have been updated to : " + bankName);
+        return ResponseEntity.ok("bank" + acquiringBankUpdateDto.getBankId() +
+                "have been updated to : " + acquiringBankUpdateDto.getBankName());
     }
 
     @DeleteMapping

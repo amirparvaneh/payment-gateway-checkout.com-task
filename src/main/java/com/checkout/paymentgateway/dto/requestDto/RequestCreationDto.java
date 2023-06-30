@@ -1,4 +1,4 @@
-package com.checkout.paymentgateway.dto;
+package com.checkout.paymentgateway.dto.requestDto;
 
 
 import lombok.Builder;

@@ -1,8 +1,8 @@
 package com.checkout.paymentgateway.controller;
 
 
-import com.checkout.paymentgateway.dto.ShopperNewDto;
-import com.checkout.paymentgateway.dto.ShopperUpdateDto;
+import com.checkout.paymentgateway.dto.shopperDto.ShopperNewDto;
+import com.checkout.paymentgateway.dto.shopperDto.ShopperUpdateDto;
 import com.checkout.paymentgateway.exception.PaymentException;
 import com.checkout.paymentgateway.model.Card;
 import com.checkout.paymentgateway.model.Shopper;

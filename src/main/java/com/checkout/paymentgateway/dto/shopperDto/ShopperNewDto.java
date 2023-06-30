@@ -1,4 +1,4 @@
-package com.checkout.paymentgateway.dto;
+package com.checkout.paymentgateway.dto.shopperDto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
