@@ -2,6 +2,7 @@ package com.checkout.paymentgateway.controller;
 
 
 import com.checkout.paymentgateway.dto.buy.BuyingRequestDto;
+import com.checkout.paymentgateway.dto.buy.BuyingResponseDto;
 import com.checkout.paymentgateway.dto.shopperDto.ShopperNewDto;
 import com.checkout.paymentgateway.dto.shopperDto.ShopperUpdateDto;
 import com.checkout.paymentgateway.exception.PaymentException;
@@ -9,6 +10,7 @@ import com.checkout.paymentgateway.model.Card;
 import com.checkout.paymentgateway.model.Shopper;
 import com.checkout.paymentgateway.service.impl.CardServiceImpl;
 import com.checkout.paymentgateway.service.impl.ShopperServiceImpl;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -70,7 +72,8 @@ public class ShopperController {
     }
 
     @PostMapping("/buy")
-    public ResponseEntity<String> buyingProduct(@RequestParam BuyingRequestDto buyingRequestDto){
-
+    public ResponseEntity<BuyingResponseDto> buyingProduct(@RequestParam BuyingRequestDto buyingRequestDto){
+        BuyingResponseDto buyResult = shopperService.buy(buyingRequestDto);
+        return ResponseEntity.ok(buyResult);
     }
 }

@@ -32,7 +32,7 @@ public class AcquiringBankServiceImpl implements AcquiringBankService {
     @Override
 
     public void update(AcquiringBank acquiringBank) throws PaymentException {
-        Optional<AcquiringBank> bank = acquiringBankRepo.findById(bankId);
+        Optional<AcquiringBank> bank = acquiringBankRepo.findById(acquiringBank.getId());
         if (bank.isEmpty()) {
             throw new PaymentException("not found");
         }

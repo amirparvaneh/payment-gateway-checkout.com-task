@@ -6,6 +6,7 @@ import com.checkout.paymentgateway.dto.requestDto.RequestValidateDto;
 import com.checkout.paymentgateway.exception.PaymentException;
 import com.checkout.paymentgateway.model.PaymentGateway;
 import com.checkout.paymentgateway.service.impl.PaymentGatewayServiceImpl;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,10 +58,8 @@ public class PaymentGatewayController {
     }
 
     @PostMapping("/requestValidation")
-    public ResponseEntity<String> validateRequest(@RequestParam RequestValidateDto requestValidateDto){
-
+    public ResponseEntity validateRequest(@RequestParam RequestValidateDto requestValidateDto){
+        paymentGatewayService.validateRequest(requestValidateDto);
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
-
-    @PostMapping("/card/information")
-    public ResponseEntity<String> stroingCardInformation()
 }
