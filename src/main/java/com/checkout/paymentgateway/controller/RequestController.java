@@ -51,7 +51,7 @@ public class RequestController {
     }
 
     @GetMapping
-    public ResponseEntity<Request> getRequest(@RequestParam Long requestId){
+    public ResponseEntity<Request> getRequest(@RequestParam Long requestId) throws PaymentException {
         Optional<Request> request = Optional.ofNullable(requestService.findById(requestId));
         return ResponseEntity.ok(request.orElse(null));
     }
@@ -64,7 +64,7 @@ public class RequestController {
     }
 
     @DeleteMapping
-    public ResponseEntity<String> deleteRequest(@RequestParam Long requestId){
+    public ResponseEntity<String> deleteRequest(@RequestParam Long requestId) throws PaymentException {
         requestService.delete(requestId);
         return ResponseEntity.ok("deleted!");
     }

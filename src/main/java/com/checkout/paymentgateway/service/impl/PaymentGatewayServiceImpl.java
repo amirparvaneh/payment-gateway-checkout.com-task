@@ -1,6 +1,7 @@
 package com.checkout.paymentgateway.service.impl;
 
 import com.checkout.paymentgateway.dto.paymentGatewayDto.UpdatePaymentGatewayDto;
+import com.checkout.paymentgateway.dto.requestDto.RequestValidateDto;
 import com.checkout.paymentgateway.exception.PaymentException;
 import com.checkout.paymentgateway.model.PaymentGateway;
 import com.checkout.paymentgateway.repository.PaymentGatewayRepo;
@@ -58,6 +59,10 @@ public class PaymentGatewayServiceImpl implements PaymentGatewayService {
            paymentGateway.get().setRequestCapacity(updatePaymentGatewayDto.getRequestCapacity());
        }
        return paymentGateway.orElse(null);
+
+    }
+
+    public void validateRequest(RequestValidateDto requestValidateDto){
 
     }
 }
