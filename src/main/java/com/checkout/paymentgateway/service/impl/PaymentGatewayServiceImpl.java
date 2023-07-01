@@ -3,6 +3,7 @@ package com.checkout.paymentgateway.service.impl;
 import com.checkout.paymentgateway.dto.paymentGatewayDto.UpdatePaymentGatewayDto;
 import com.checkout.paymentgateway.dto.requestDto.RequestValidateDto;
 import com.checkout.paymentgateway.exception.PaymentException;
+import com.checkout.paymentgateway.model.Card;
 import com.checkout.paymentgateway.model.PaymentGateway;
 import com.checkout.paymentgateway.repository.PaymentGatewayRepo;
 import com.checkout.paymentgateway.service.PaymentGatewayService;
@@ -63,6 +64,10 @@ public class PaymentGatewayServiceImpl implements PaymentGatewayService {
     }
 
     public void validateRequest(RequestValidateDto requestValidateDto){
+
+    }
+
+    public void storingCardInformation(Card card){
 
     }
 }

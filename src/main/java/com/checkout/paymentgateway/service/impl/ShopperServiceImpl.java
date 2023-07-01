@@ -1,6 +1,7 @@
 package com.checkout.paymentgateway.service.impl;
 
 import com.checkout.paymentgateway.dto.buy.BuyingRequestDto;
+import com.checkout.paymentgateway.dto.buy.BuyingResponseDto;
 import com.checkout.paymentgateway.dto.shopperDto.ShopperUpdateDto;
 import com.checkout.paymentgateway.exception.PaymentException;
 import com.checkout.paymentgateway.model.Shopper;
@@ -55,7 +56,7 @@ public class ShopperServiceImpl implements ShopperService {
         return Optional.empty();
     }
 
-    public void buy(BuyingRequestDto buyingRequestDto){
+    public BuyingResponseDto buy(BuyingRequestDto buyingRequestDto){
 
     }
 }
