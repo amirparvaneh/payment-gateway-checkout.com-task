@@ -1,6 +1,7 @@
 package com.checkout.paymentgateway.controller;
 
 
+import com.checkout.paymentgateway.dto.buy.BuyingRequestDto;
 import com.checkout.paymentgateway.dto.shopperDto.ShopperNewDto;
 import com.checkout.paymentgateway.dto.shopperDto.ShopperUpdateDto;
 import com.checkout.paymentgateway.exception.PaymentException;
@@ -66,5 +67,10 @@ public class ShopperController {
     public ResponseEntity<String> deleteShopper(@RequestParam Long id) {
         shopperService.delete(id);
         return ResponseEntity.ok("shopper id : " + "deleted!");
+    }
+
+    @PostMapping("/buy")
+    public ResponseEntity<String> buyingProduct(@RequestParam BuyingRequestDto buyingRequestDto){
+
     }
 }

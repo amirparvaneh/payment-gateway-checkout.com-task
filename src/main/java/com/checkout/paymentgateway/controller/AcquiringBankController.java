@@ -48,10 +48,9 @@ public class AcquiringBankController {
     @PutMapping
     public ResponseEntity<String> updateBank(@RequestBody AcquiringBankUpdateDto acquiringBankUpdateDto)
             throws PaymentException {
-        AcquiringBank acquiringBank = acquiringBankService.findById(acquiringBankUpdateDto.);
+        AcquiringBank acquiringBank = acquiringBankService.findById(acquiringBankUpdateDto.getBankId());
         if (Objects.nonNull(acquiringBank)) {
-            acquiringBank.setName(acquiringBankUpdateDto.getBankName());
-            acquiringBankService.updateByDto();
+            acquiringBankService.updateByDto(acquiringBankUpdateDto);
         }
         return ResponseEntity.ok("bank" + acquiringBankUpdateDto.getBankId() +
                 "have been updated to : " + acquiringBankUpdateDto.getBankName());

@@ -2,6 +2,7 @@ package com.checkout.paymentgateway.controller;
 
 import com.checkout.paymentgateway.dto.paymentGatewayDto.PaymentGateWayNewDto;
 import com.checkout.paymentgateway.dto.paymentGatewayDto.UpdatePaymentGatewayDto;
+import com.checkout.paymentgateway.dto.requestDto.RequestValidateDto;
 import com.checkout.paymentgateway.exception.PaymentException;
 import com.checkout.paymentgateway.model.PaymentGateway;
 import com.checkout.paymentgateway.service.impl.PaymentGatewayServiceImpl;
@@ -54,4 +55,12 @@ public class PaymentGatewayController {
         paymentGatewayService.delete(paymentGatewayId);
         return ResponseEntity.ok("deleted");
     }
+
+    @PostMapping("/requestValidation")
+    public ResponseEntity<String> validateRequest(@RequestParam RequestValidateDto requestValidateDto){
+
+    }
+
+    @PostMapping("/card/information")
+    public ResponseEntity<String> stroingCardInformation()
 }
