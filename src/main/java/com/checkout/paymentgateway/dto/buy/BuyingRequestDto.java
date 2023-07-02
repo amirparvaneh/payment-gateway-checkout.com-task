@@ -12,4 +12,5 @@ public class BuyingRequestDto implements Serializable {
     private Long shopperId;
     private Long price;
     private Long cardNumber;
+    private Long paymentGateway;
 }
