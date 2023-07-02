@@ -4,6 +4,7 @@ import com.checkout.paymentgateway.dto.buy.BuyingRequestDto;
 import com.checkout.paymentgateway.dto.buy.BuyingResponseDto;
 import com.checkout.paymentgateway.dto.shopperDto.ShopperUpdateDto;
 import com.checkout.paymentgateway.exception.PaymentException;
+import com.checkout.paymentgateway.model.PaymentGateway;
 import com.checkout.paymentgateway.model.Shopper;
 import com.checkout.paymentgateway.repository.ShopperRepo;
 import com.checkout.paymentgateway.service.ShopperService;
@@ -16,24 +17,28 @@ import java.util.Optional;
 public class ShopperServiceImpl implements ShopperService {
 
     private final ShopperRepo shopperRepo;
+    private final PaymentGatewayServiceImpl paymentGatewayService;
 
 
-    public ShopperServiceImpl(ShopperRepo shopperRepo) {
+    public ShopperServiceImpl(ShopperRepo shopperRepo, PaymentGatewayServiceImpl paymentGatewayService) {
         this.shopperRepo = shopperRepo;
+        this.paymentGatewayService = paymentGatewayService;
     }
 
     @Override
     public void save(Shopper shopper) {
         shopperRepo.save(shopper);
-
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Long shopperId) {
+        shopperRepo.deleteById(shopperId);
     }
 
     @Override
-    public void update(Shopper shopper) {
+    public void update(Shopper shopper) throws PaymentException {
+        validateShopper(shopper.getId());
+        shopperRepo.save(shopper);
     }
 
     @Override
@@ -56,7 +61,16 @@ public class ShopperServiceImpl implements ShopperService {
         return Optional.empty();
     }
 
-    public BuyingResponseDto buy(BuyingRequestDto buyingRequestDto){
+    private void validateShopper(Long shopperId) throws PaymentException {
+        Optional<Shopper> shopper = shopperRepo.findById(shopperId);
+        if (shopper.isEmpty()){
+            throw new PaymentException("there is no shopper with this id");
+        }
+    }
 
+    public BuyingResponseDto buy(BuyingRequestDto buyingRequestDto){
+        //todo send this request to the payment gateway and then validate payment
+        // and send this again and check with merchant product request
+        PaymentGateway paymentGateway = paymentGatewayService.findById(buyingRequestDto.getPaymentGateway());
     }
 }
