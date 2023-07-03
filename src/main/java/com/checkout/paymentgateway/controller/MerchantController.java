@@ -69,7 +69,7 @@ public class MerchantController {
 
     @DeleteMapping
     @ResponseStatus(value = HttpStatus.ACCEPTED)
-    public ResponseEntity<String> deleteMerchant(@RequestParam Long id){
+    public ResponseEntity<String> deleteMerchant(@RequestParam Long id) throws PaymentException {
         Optional<Merchant> merchant = Optional.ofNullable(merchantService.findById(id));
         if (merchant.isPresent()){
             merchantService.delete(id);
@@ -77,6 +77,9 @@ public class MerchantController {
         return ResponseEntity.ok("deleted");
     }
 
+
+    @PostMapping("/create/account/onbank")
+    public ResponseEntity<Account> createAccountOnBank(Account)
 
 }
 
