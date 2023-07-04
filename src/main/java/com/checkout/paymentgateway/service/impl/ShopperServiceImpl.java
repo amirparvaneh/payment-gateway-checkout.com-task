@@ -72,5 +72,6 @@ public class ShopperServiceImpl implements ShopperService {
         //todo send this request to the payment gateway and then validate payment
         // and send this again and check with merchant product request
         PaymentGateway paymentGateway = paymentGatewayService.findById(buyingRequestDto.getPaymentGateway());
+
     }
 }

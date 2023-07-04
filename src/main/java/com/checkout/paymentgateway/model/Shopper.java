@@ -25,4 +25,6 @@ public class Shopper extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "payment_gateway_id")
     private PaymentGateway paymentGateway;
+
+    private Long accountNumber;
 }
