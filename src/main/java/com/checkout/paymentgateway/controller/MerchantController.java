@@ -4,6 +4,7 @@ package com.checkout.paymentgateway.controller;
 import com.checkout.paymentgateway.dto.merchantDto.MerchantNewDto;
 
 import com.checkout.paymentgateway.exception.PaymentException;
+import com.checkout.paymentgateway.model.Account;
 import com.checkout.paymentgateway.model.Merchant;
 import com.checkout.paymentgateway.model.PaymentGateway;
 import com.checkout.paymentgateway.service.impl.MerchantServiceImpl;
@@ -79,7 +80,9 @@ public class MerchantController {
 
 
     @PostMapping("/create/account/onbank")
-    public ResponseEntity<Account> createAccountOnBank(Account)
+    public ResponseEntity<Account> createAccountOnBank(Account account){
+
+    }
 
 }
 

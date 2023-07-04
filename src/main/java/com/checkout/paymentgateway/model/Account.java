@@ -12,7 +12,7 @@ import lombok.Data;
 @AllArgsConstructor
 @Data
 @Builder
-public class Account {
+public class Account extends BaseEntity {
     private Long accountNumber;
     private Long balance;
     private Long MerchantId;

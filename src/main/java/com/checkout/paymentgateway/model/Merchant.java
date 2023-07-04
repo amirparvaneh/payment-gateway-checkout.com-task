@@ -25,4 +25,5 @@ public class Merchant extends BaseEntity{
     @JoinColumn(name = "payment_gateway_id")
     private PaymentGateway paymentGateway;
 
+    private Long accountNumber;
 }
