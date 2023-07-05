@@ -80,7 +80,7 @@ public class MerchantController {
 
 
     @PostMapping("/create/account/onbank")
-    public ResponseEntity<Account> createAccountOnBank(Account account){
+    public ResponseEntity<Account> createAccountOnBank(@RequestParam MerchantAccountNewDto merchantAccountNewDto){
 
     }
 

@@ -8,7 +8,6 @@ import java.io.Serializable;
 @Data
 @Builder
 public class BuyingRequestDto implements Serializable {
-
     private Long shopperId;
     private Long price;
     private Long cardNumber;

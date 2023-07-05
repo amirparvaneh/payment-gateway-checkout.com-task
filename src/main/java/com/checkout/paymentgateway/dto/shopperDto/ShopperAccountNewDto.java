@@ -9,5 +9,7 @@ import java.io.Serializable;
 @Data
 @Builder
 public class ShopperAccountNewDto implements Serializable {
-
+    private Long shopperId;
+    private Long cardNumber;
+    private Long accountId;
 }
