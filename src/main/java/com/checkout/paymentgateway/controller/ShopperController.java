@@ -3,9 +3,11 @@ package com.checkout.paymentgateway.controller;
 
 import com.checkout.paymentgateway.dto.buy.BuyingRequestDto;
 import com.checkout.paymentgateway.dto.buy.BuyingResponseDto;
+import com.checkout.paymentgateway.dto.shopperDto.ShopperAccountNewDto;
 import com.checkout.paymentgateway.dto.shopperDto.ShopperNewDto;
 import com.checkout.paymentgateway.dto.shopperDto.ShopperUpdateDto;
 import com.checkout.paymentgateway.exception.PaymentException;
+import com.checkout.paymentgateway.model.Account;
 import com.checkout.paymentgateway.model.Card;
 import com.checkout.paymentgateway.model.Shopper;
 import com.checkout.paymentgateway.service.impl.CardServiceImpl;
@@ -75,5 +77,10 @@ public class ShopperController {
     public ResponseEntity<BuyingResponseDto> buyingProduct(@RequestParam BuyingRequestDto buyingRequestDto){
         BuyingResponseDto buyResult = shopperService.buy(buyingRequestDto);
         return ResponseEntity.ok(buyResult);
+    }
+
+    @PostMapping("/create/account")
+    public ResponseEntity<Account> createShopperAccount(@RequestParam ShopperAccountNewDto shopperAccountNewDto){
+
     }
 }

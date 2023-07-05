@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 
 @Data
 @Entity
@@ -20,5 +22,7 @@ public class AcquiringBank extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "payment_gateway_id")
     private PaymentGateway paymentGateway;
+    @OneToMany(mappedBy = "AcquiringBank")
+    private List<Account> accountList;
 
 }
