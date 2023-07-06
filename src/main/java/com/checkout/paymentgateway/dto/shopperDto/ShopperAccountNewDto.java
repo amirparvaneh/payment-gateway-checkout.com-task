@@ -10,6 +10,8 @@ import java.io.Serializable;
 @Builder
 public class ShopperAccountNewDto implements Serializable {
     private Long shopperId;
-    private Long cardNumber;
+    private Long settleDeposit;
     private Long accountId;
+    private Long accountNumber;
+    private Long bankCode;
 }

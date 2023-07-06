@@ -2,10 +2,13 @@ package com.checkout.paymentgateway.service.impl;
 
 import com.checkout.paymentgateway.dto.buy.BuyingRequestDto;
 import com.checkout.paymentgateway.dto.buy.BuyingResponseDto;
+import com.checkout.paymentgateway.dto.shopperDto.ShopperAccountNewDto;
 import com.checkout.paymentgateway.dto.shopperDto.ShopperUpdateDto;
 import com.checkout.paymentgateway.exception.PaymentException;
+import com.checkout.paymentgateway.model.Account;
 import com.checkout.paymentgateway.model.PaymentGateway;
 import com.checkout.paymentgateway.model.Shopper;
+import com.checkout.paymentgateway.repository.AccountRepo;
 import com.checkout.paymentgateway.repository.ShopperRepo;
 import com.checkout.paymentgateway.service.ShopperService;
 import org.springframework.stereotype.Service;
@@ -18,11 +21,14 @@ public class ShopperServiceImpl implements ShopperService {
 
     private final ShopperRepo shopperRepo;
     private final PaymentGatewayServiceImpl paymentGatewayService;
+    private final AccountRepo accountRepo;
 
 
-    public ShopperServiceImpl(ShopperRepo shopperRepo, PaymentGatewayServiceImpl paymentGatewayService) {
+    public ShopperServiceImpl(ShopperRepo shopperRepo, PaymentGatewayServiceImpl paymentGatewayService,
+                              AccountRepo accountRepo) {
         this.shopperRepo = shopperRepo;
         this.paymentGatewayService = paymentGatewayService;
+        this.accountRepo = accountRepo;
     }
 
     @Override
@@ -66,6 +72,16 @@ public class ShopperServiceImpl implements ShopperService {
         if (shopper.isEmpty()){
             throw new PaymentException("there is no shopper with this id");
         }
+    }
+
+    public Account saveAccount(ShopperAccountNewDto shopperAccountNewDto){
+        Account account = Account.builder()
+                .accountNumber(shopperAccountNewDto.getAccountNumber())
+                .ownerId(shopperAccountNewDto.getShopperId())
+                .balance(shopperAccountNewDto.getSettleDeposit())
+                .build();
+        accountRepo.save(account);
+        return account;
     }
 
     public BuyingResponseDto buy(BuyingRequestDto buyingRequestDto){

@@ -10,6 +10,7 @@ import com.checkout.paymentgateway.exception.PaymentException;
 import com.checkout.paymentgateway.model.Account;
 import com.checkout.paymentgateway.model.Card;
 import com.checkout.paymentgateway.model.Shopper;
+import com.checkout.paymentgateway.service.impl.AcquiringBankServiceImpl;
 import com.checkout.paymentgateway.service.impl.CardServiceImpl;
 import com.checkout.paymentgateway.service.impl.ShopperServiceImpl;
 import org.springframework.http.HttpStatus;
@@ -27,10 +28,13 @@ public class ShopperController {
 
     private final ShopperServiceImpl shopperService;
     private final CardServiceImpl cardService;
+    private final AcquiringBankServiceImpl acquiringBankService;
 
-    public ShopperController(ShopperServiceImpl shopperService, CardServiceImpl cardService) {
+    public ShopperController(ShopperServiceImpl shopperService, CardServiceImpl cardService,
+                             AcquiringBankServiceImpl acquiringBankService) {
         this.shopperService = shopperService;
         this.cardService = cardService;
+        this.acquiringBankService = acquiringBankService;
     }
 
 
@@ -73,19 +77,20 @@ public class ShopperController {
         return ResponseEntity.ok("shopper id : " + "deleted!");
     }
 
+
+    @PostMapping("/create/account")
+    public ResponseEntity<Account> createShopperAccount(@RequestParam ShopperAccountNewDto shopperAccountNewDto) {
+        shopperAccountNewDto.setAccountNumber(acquiringBankService.accountNumberCreator(shopperAccountNewDto.getShopperId(),
+                shopperAccountNewDto.getBankCode()));
+        Account account = shopperService.saveAccount(shopperAccountNewDto);
+        return ResponseEntity.ok(account);
+    }
+
     @PostMapping("/buy")
-    public ResponseEntity<BuyingResponseDto> buyingProduct(@RequestParam BuyingRequestDto buyingRequestDto){
+    public ResponseEntity<BuyingResponseDto> buyingProduct(@RequestParam BuyingRequestDto buyingRequestDto) {
         BuyingResponseDto buyResult = shopperService.buy(buyingRequestDto);
         return ResponseEntity.ok(buyResult);
     }
 
-    @PostMapping("/create/account")
-    public ResponseEntity<Account> createShopperAccount(@RequestParam ShopperAccountNewDto shopperAccountNewDto){
-        Account account = Account.builder()
-                .accountNumber(shopperAccountNewDto.getCardNumber())
-                .build();
-        return ResponseEntity.ok(account);
-    }
 
-    
 }
