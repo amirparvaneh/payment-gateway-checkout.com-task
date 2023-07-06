@@ -58,10 +58,12 @@ public class MerchantServiceImpl implements MerchantService {
     }
 
     public Account createAccount(MerchantAccountNewDto merchantAccountNewDto){
-        return Account.builder()
+        Account account =  Account.builder()
                 .ownerId(merchantAccountNewDto.getMerchantId())
                 .accountNumber(merchantAccountNewDto.getAccountNumber())
                 .build();
+        accountRepo.save(account);
+        return account;
     }
 
 
