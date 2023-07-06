@@ -1,7 +1,10 @@
 package com.checkout.paymentgateway.service.impl;
 
+import com.checkout.paymentgateway.dto.merchantDto.MerchantAccountNewDto;
 import com.checkout.paymentgateway.exception.PaymentException;
+import com.checkout.paymentgateway.model.Account;
 import com.checkout.paymentgateway.model.Merchant;
+import com.checkout.paymentgateway.repository.AccountRepo;
 import com.checkout.paymentgateway.repository.MerchantRepo;
 import com.checkout.paymentgateway.service.MerchantService;
 import org.springframework.stereotype.Service;
@@ -13,9 +16,11 @@ import java.util.Optional;
 public class MerchantServiceImpl implements MerchantService {
 
     private final MerchantRepo merchantRepo;
+    private final AccountRepo accountRepo;
 
-    public MerchantServiceImpl(MerchantRepo merchantRepo){
+    public MerchantServiceImpl(MerchantRepo merchantRepo, AccountRepo accountRepo){
         this.merchantRepo = merchantRepo;
+        this.accountRepo = accountRepo;
     }
     @Override
     public void save(Merchant merchant) {
@@ -51,4 +56,13 @@ public class MerchantServiceImpl implements MerchantService {
         }
 
     }
+
+    public Account createAccount(MerchantAccountNewDto merchantAccountNewDto){
+        return Account.builder()
+                .ownerId(merchantAccountNewDto.getMerchantId())
+                .accountNumber(merchantAccountNewDto.getAccountNumber())
+                .build();
+    }
+
+
 }
