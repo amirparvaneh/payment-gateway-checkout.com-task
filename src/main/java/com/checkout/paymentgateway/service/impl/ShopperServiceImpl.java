@@ -5,9 +5,7 @@ import com.checkout.paymentgateway.dto.buy.BuyingResponseDto;
 import com.checkout.paymentgateway.dto.shopperDto.ShopperAccountNewDto;
 import com.checkout.paymentgateway.dto.shopperDto.ShopperUpdateDto;
 import com.checkout.paymentgateway.exception.PaymentException;
-import com.checkout.paymentgateway.model.Account;
-import com.checkout.paymentgateway.model.PaymentGateway;
-import com.checkout.paymentgateway.model.Shopper;
+import com.checkout.paymentgateway.model.*;
 import com.checkout.paymentgateway.repository.AccountRepo;
 import com.checkout.paymentgateway.repository.ShopperRepo;
 import com.checkout.paymentgateway.service.ShopperService;
@@ -22,13 +20,16 @@ public class ShopperServiceImpl implements ShopperService {
     private final ShopperRepo shopperRepo;
     private final PaymentGatewayServiceImpl paymentGatewayService;
     private final AccountRepo accountRepo;
+    private final MerchantServiceImpl merchantService;
 
 
     public ShopperServiceImpl(ShopperRepo shopperRepo, PaymentGatewayServiceImpl paymentGatewayService,
-                              AccountRepo accountRepo) {
+                              AccountRepo accountRepo,
+                              MerchantServiceImpl merchantService) {
         this.shopperRepo = shopperRepo;
         this.paymentGatewayService = paymentGatewayService;
         this.accountRepo = accountRepo;
+        this.merchantService = merchantService;
     }
 
     @Override
@@ -53,8 +54,12 @@ public class ShopperServiceImpl implements ShopperService {
     }
 
     @Override
-    public Shopper findById(Long id) {
-        return null;
+    public Shopper findById(Long shopperId) throws PaymentException {
+         Optional<Shopper> shopper= shopperRepo.findById(shopperId);
+         if (shopper.isEmpty()){
+             throw new PaymentException("not found");
+         }
+         return shopper.get();
     }
 
     public Optional<Shopper> updateByDto(ShopperUpdateDto shopperUpdateDto) throws PaymentException {
@@ -84,10 +89,21 @@ public class ShopperServiceImpl implements ShopperService {
         return account;
     }
 
-    public BuyingResponseDto buy(BuyingRequestDto buyingRequestDto){
+    public BuyingResponseDto buy(BuyingRequestDto buyingRequestDto) throws PaymentException {
         //todo send this request to the payment gateway and then validate payment
         // and send this again and check with merchant product request
         PaymentGateway paymentGateway = paymentGatewayService.findById(buyingRequestDto.getPaymentGateway());
-
+        Merchant merchant = merchantService.findById(buyingRequestDto.getMerchantId());
+        Shopper shopper = findById(buyingRequestDto.getShopperId());
+        Request request = Request.builder()
+                .shopper(shopper)
+                .merchant(merchant)
+                .paymentGateway(paymentGateway)
+                .price(buyingRequestDto.getPrice())
+                .description(buyingRequestDto.getDescription())
+                .product(buyingRequestDto.getProduct())
+                .build();
+        BuyingResponseDto buyingResponseDto = paymentGatewayService.getRequestOfShopper(request);
+        return ;
     }
 }

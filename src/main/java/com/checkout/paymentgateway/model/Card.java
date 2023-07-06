@@ -22,7 +22,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Card extends BaseEntity {
 
-    @NotNull
+    @NotNull(message = "card number should not be empty !")
     @Digits(integer = 4, fraction = 0, message = "the card number should be 4 digits ! ")
     private Long cardNumber;
     private String cvv;

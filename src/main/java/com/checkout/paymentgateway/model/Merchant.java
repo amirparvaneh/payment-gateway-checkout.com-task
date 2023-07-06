@@ -26,4 +26,6 @@ public class Merchant extends BaseEntity{
     private PaymentGateway paymentGateway;
 
     private Long accountNumber;
+
+    private String product;
 }
