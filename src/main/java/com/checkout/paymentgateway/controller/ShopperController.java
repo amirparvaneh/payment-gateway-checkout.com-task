@@ -82,8 +82,10 @@ public class ShopperController {
     @PostMapping("/create/account")
     public ResponseEntity<Account> createShopperAccount(@RequestParam ShopperAccountNewDto shopperAccountNewDto){
         Account account = Account.builder()
-                .accountNumber(shopperAccountNewDto.ge)
+                .accountNumber(shopperAccountNewDto.getCardNumber())
                 .build();
         return ResponseEntity.ok(account);
     }
+
+    
 }

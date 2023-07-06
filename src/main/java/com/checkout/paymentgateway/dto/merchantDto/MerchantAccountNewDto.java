@@ -8,4 +8,7 @@ import lombok.Data;
 public class MerchantAccountNewDto {
     private Long merchantId;
     private Long bankId;
+    private Long firstDeposit;
+    private Long accountNumber;
+    private Long bankCode;
 }

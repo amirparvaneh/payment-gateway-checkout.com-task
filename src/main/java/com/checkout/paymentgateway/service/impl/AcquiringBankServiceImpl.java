@@ -5,6 +5,7 @@ import com.checkout.paymentgateway.exception.PaymentException;
 import com.checkout.paymentgateway.model.AcquiringBank;
 import com.checkout.paymentgateway.repository.AcquiringBankRepo;
 import com.checkout.paymentgateway.service.AcquiringBankService;
+import com.sun.jdi.LongValue;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -63,5 +64,10 @@ public class AcquiringBankServiceImpl implements AcquiringBankService {
 
     public AcquiringBank findByName(String bankName) {
         return acquiringBankRepo.findAcquiringBankByName(bankName);
+    }
+
+    public Long accountNumberCreator(Long ownerId,Long bankCode){
+        String accountNumber = ownerId.toString()  + "000" + bankCode.toString();
+        return Long.parseLong(accountNumber);
     }
 }

@@ -1,12 +1,14 @@
 package com.checkout.paymentgateway.controller;
 
 
+import com.checkout.paymentgateway.dto.merchantDto.MerchantAccountNewDto;
 import com.checkout.paymentgateway.dto.merchantDto.MerchantNewDto;
 
 import com.checkout.paymentgateway.exception.PaymentException;
 import com.checkout.paymentgateway.model.Account;
 import com.checkout.paymentgateway.model.Merchant;
 import com.checkout.paymentgateway.model.PaymentGateway;
+import com.checkout.paymentgateway.service.impl.AcquiringBankServiceImpl;
 import com.checkout.paymentgateway.service.impl.MerchantServiceImpl;
 import com.checkout.paymentgateway.service.impl.PaymentGatewayServiceImpl;
 import org.springframework.data.domain.PageRequest;
@@ -24,10 +26,13 @@ public class MerchantController {
 
     private final MerchantServiceImpl merchantService;
     private final PaymentGatewayServiceImpl paymentGatewayService;
+    private final AcquiringBankServiceImpl acquiringBankService;
 
-    public MerchantController(MerchantServiceImpl merchantService, PaymentGatewayServiceImpl paymentGatewayService) {
+    public MerchantController(MerchantServiceImpl merchantService, PaymentGatewayServiceImpl paymentGatewayService
+    ,AcquiringBankServiceImpl acquiringBankService) {
         this.merchantService = merchantService;
         this.paymentGatewayService = paymentGatewayService;
+        this.acquiringBankService = acquiringBankService;
     }
 
     @GetMapping
@@ -81,7 +86,10 @@ public class MerchantController {
 
     @PostMapping("/create/account/onbank")
     public ResponseEntity<Account> createAccountOnBank(@RequestParam MerchantAccountNewDto merchantAccountNewDto){
-
+        merchantAccountNewDto.setAccountNumber(acquiringBankService.accountNumberCreator(merchantAccountNewDto.getMerchantId(),
+                merchantAccountNewDto.getBankCode()));
+        Account account = merchantService.createAccount(merchantAccountNewDto);
+        return ResponseEntity.ok(account);
     }
 
 }
