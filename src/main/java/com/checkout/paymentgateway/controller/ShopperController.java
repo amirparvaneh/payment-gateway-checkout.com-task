@@ -51,7 +51,7 @@ public class ShopperController {
     }
 
     @GetMapping
-    public ResponseEntity<Shopper> getShopperById(@RequestParam Long shopperId) {
+    public ResponseEntity<Shopper> getShopperById(@RequestParam Long shopperId) throws PaymentException {
         Optional<Shopper> shopper = Optional.ofNullable(shopperService.findById(shopperId));
         return ResponseEntity.ok(shopper.orElse(null));
     }
@@ -87,10 +87,13 @@ public class ShopperController {
     }
 
     @PostMapping("/buy")
-    public ResponseEntity<BuyingResponseDto> buyingProduct(@RequestParam BuyingRequestDto buyingRequestDto) {
+    public ResponseEntity<BuyingResponseDto> buyingProduct(@RequestParam BuyingRequestDto buyingRequestDto) throws PaymentException {
         BuyingResponseDto buyResult = shopperService.buy(buyingRequestDto);
         return ResponseEntity.ok(buyResult);
     }
+
+
+
 
 
 }

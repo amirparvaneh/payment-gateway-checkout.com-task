@@ -1,9 +1,12 @@
 package com.checkout.paymentgateway.service.impl;
 
 import com.checkout.paymentgateway.dto.merchantDto.MerchantAccountNewDto;
+import com.checkout.paymentgateway.dto.paymentGatewayDto.PaymentRequestDto;
+import com.checkout.paymentgateway.dto.paymentGatewayDto.PaymentResponseDto;
 import com.checkout.paymentgateway.exception.PaymentException;
 import com.checkout.paymentgateway.model.Account;
 import com.checkout.paymentgateway.model.Merchant;
+import com.checkout.paymentgateway.model.Request;
 import com.checkout.paymentgateway.repository.AccountRepo;
 import com.checkout.paymentgateway.repository.MerchantRepo;
 import com.checkout.paymentgateway.service.MerchantService;
@@ -66,4 +69,11 @@ public class MerchantServiceImpl implements MerchantService {
         return account;
     }
 
+    public Long getShopperRequest(){
+
+    }
+
+    public PaymentResponseDto sendRequestToPG(PaymentRequestDto paymentRequestDto){
+
+    }
 }
