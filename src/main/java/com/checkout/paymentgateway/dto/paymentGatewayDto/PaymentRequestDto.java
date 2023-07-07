@@ -1,7 +1,5 @@
 package com.checkout.paymentgateway.dto.paymentGatewayDto;
 
-
-import com.checkout.paymentgateway.model.Request;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,5 +8,8 @@ import java.io.Serializable;
 @Data
 @Builder
 public class PaymentRequestDto implements Serializable {
-    private Request request;
+    private Long requestId;
+    private Long shopperId;
+    private Long merchantId;
+    private Long paymentGatewayId;
 }

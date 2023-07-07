@@ -50,8 +50,12 @@ public class PaymentGatewayServiceImpl implements PaymentGatewayService {
 
 
     @Override
-    public PaymentGateway findById(Long id) {
-        return null;
+    public PaymentGateway findById(Long paymentGatewayId) throws PaymentException {
+        Optional<PaymentGateway> paymentGateway = paymentGatewayRepo.findById(paymentGatewayId);
+        if (paymentGateway.isEmpty()){
+            throw new PaymentException("not found");
+        }
+        return paymentGateway.get();
     }
 
     public PaymentGateway updatePaymentByDto(Long id , UpdatePaymentGatewayDto updatePaymentGatewayDto){
@@ -66,6 +70,14 @@ public class PaymentGatewayServiceImpl implements PaymentGatewayService {
     }
 
     public BuyingResponseDto getRequestOfShopper(Request request){
+
+    }
+
+    public void sendRequestToBank(){
+
+    }
+
+    public void sendPaymentResponseToMerchant(){
 
     }
 

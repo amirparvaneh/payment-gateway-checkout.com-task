@@ -89,21 +89,18 @@ public class ShopperServiceImpl implements ShopperService {
         return account;
     }
 
-    public BuyingResponseDto buy(BuyingRequestDto buyingRequestDto) throws PaymentException {
-        //todo send this request to the payment gateway and then validate payment
-        // and send this again and check with merchant product request
-        PaymentGateway paymentGateway = paymentGatewayService.findById(buyingRequestDto.getPaymentGateway());
+    public Long buy(BuyingRequestDto buyingRequestDto) throws PaymentException {
+
         Merchant merchant = merchantService.findById(buyingRequestDto.getMerchantId());
         Shopper shopper = findById(buyingRequestDto.getShopperId());
         Request request = Request.builder()
                 .shopper(shopper)
                 .merchant(merchant)
-                .paymentGateway(paymentGateway)
                 .price(buyingRequestDto.getPrice())
                 .description(buyingRequestDto.getDescription())
                 .product(buyingRequestDto.getProduct())
                 .build();
-        BuyingResponseDto buyingResponseDto = paymentGatewayService.getRequestOfShopper(request);
+        merchantService.getShopperRequest(request);
         return ;
     }
 }

@@ -4,10 +4,13 @@ package com.checkout.paymentgateway.controller;
 import com.checkout.paymentgateway.dto.merchantDto.MerchantAccountNewDto;
 import com.checkout.paymentgateway.dto.merchantDto.MerchantNewDto;
 
+import com.checkout.paymentgateway.dto.paymentGatewayDto.PaymentRequestDto;
+import com.checkout.paymentgateway.dto.paymentGatewayDto.PaymentResponseDto;
 import com.checkout.paymentgateway.exception.PaymentException;
 import com.checkout.paymentgateway.model.Account;
 import com.checkout.paymentgateway.model.Merchant;
 import com.checkout.paymentgateway.model.PaymentGateway;
+import com.checkout.paymentgateway.model.Request;
 import com.checkout.paymentgateway.service.impl.AcquiringBankServiceImpl;
 import com.checkout.paymentgateway.service.impl.MerchantServiceImpl;
 import com.checkout.paymentgateway.service.impl.PaymentGatewayServiceImpl;
@@ -17,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -46,7 +50,7 @@ public class MerchantController {
 
 
     @PostMapping
-    public ResponseEntity<String> saveMerchant(@RequestBody MerchantNewDto merchantNewDto) {
+    public ResponseEntity<String> saveMerchant(@RequestBody MerchantNewDto merchantNewDto) throws PaymentException {
         PaymentGateway paymentGateWay = paymentGatewayService.findById(merchantNewDto.getPaymentGatewayId());
         Merchant merchant = Merchant.builder()
                 .name(merchantNewDto.getName())
@@ -90,6 +94,22 @@ public class MerchantController {
                 merchantAccountNewDto.getBankCode()));
         Account account = merchantService.createAccount(merchantAccountNewDto);
         return ResponseEntity.ok(account);
+    }
+
+    @GetMapping("/shopper/requests")
+    public List<Request> getShopperRequest(){
+        merchantService.getShopperRequest()
+    }
+
+    @PostMapping("/payment/request")
+    public PaymentResponseDto processPayment(@RequestParam PaymentRequestDto paymentRequestDto){
+        PaymentResponseDto paymentResponseDto = merchantService.sendRequestToPG(paymentRequestDto);
+        return
+    }
+
+    @GetMapping("/retrieve/payment")
+    public PaymentResponseDto retrievePayment(@RequestParam Long paymentId){
+
     }
 
 }
