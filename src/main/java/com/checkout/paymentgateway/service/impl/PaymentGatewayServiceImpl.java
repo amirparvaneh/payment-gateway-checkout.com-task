@@ -1,6 +1,8 @@
 package com.checkout.paymentgateway.service.impl;
 
 import com.checkout.paymentgateway.dto.buy.BuyingResponseDto;
+import com.checkout.paymentgateway.dto.merchantDto.MerchantCallRequestDto;
+import com.checkout.paymentgateway.dto.paymentGatewayDto.PaymentResponseDto;
 import com.checkout.paymentgateway.dto.paymentGatewayDto.UpdatePaymentGatewayDto;
 import com.checkout.paymentgateway.dto.requestDto.RequestValidateDto;
 import com.checkout.paymentgateway.exception.PaymentException;
@@ -69,7 +71,7 @@ public class PaymentGatewayServiceImpl implements PaymentGatewayService {
 
     }
 
-    public BuyingResponseDto getRequestOfShopper(Request request){
+    public PaymentResponseDto pay(MerchantCallRequestDto merchantCallRequestDto){
 
     }
 

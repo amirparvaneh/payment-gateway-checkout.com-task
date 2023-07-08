@@ -89,8 +89,7 @@ public class ShopperServiceImpl implements ShopperService {
         return account;
     }
 
-    public Long buy(BuyingRequestDto buyingRequestDto) throws PaymentException {
-
+    public Request buy(BuyingRequestDto buyingRequestDto) throws PaymentException {
         Merchant merchant = merchantService.findById(buyingRequestDto.getMerchantId());
         Shopper shopper = findById(buyingRequestDto.getShopperId());
         Request request = Request.builder()
@@ -100,7 +99,6 @@ public class ShopperServiceImpl implements ShopperService {
                 .description(buyingRequestDto.getDescription())
                 .product(buyingRequestDto.getProduct())
                 .build();
-        merchantService.getShopperRequest(request);
-        return ;
+        return request;
     }
 }

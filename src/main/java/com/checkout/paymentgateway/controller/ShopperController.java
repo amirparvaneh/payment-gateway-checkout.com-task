@@ -9,6 +9,7 @@ import com.checkout.paymentgateway.dto.shopperDto.ShopperUpdateDto;
 import com.checkout.paymentgateway.exception.PaymentException;
 import com.checkout.paymentgateway.model.Account;
 import com.checkout.paymentgateway.model.Card;
+import com.checkout.paymentgateway.model.Request;
 import com.checkout.paymentgateway.model.Shopper;
 import com.checkout.paymentgateway.service.impl.AcquiringBankServiceImpl;
 import com.checkout.paymentgateway.service.impl.CardServiceImpl;
@@ -87,9 +88,9 @@ public class ShopperController {
     }
 
     @PostMapping("/buy")
-    public ResponseEntity<BuyingResponseDto> buyingProduct(@RequestParam BuyingRequestDto buyingRequestDto) throws PaymentException {
-        BuyingResponseDto buyResult = shopperService.buy(buyingRequestDto);
-        return ResponseEntity.ok(buyResult);
+    public ResponseEntity<Request> buyingProduct(@RequestParam BuyingRequestDto buyingRequestDto) throws PaymentException {
+        Request request = shopperService.buy(buyingRequestDto);
+        return ResponseEntity.ok(request);
     }
 
 

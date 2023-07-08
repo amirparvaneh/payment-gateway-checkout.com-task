@@ -9,6 +9,8 @@ import java.io.Serializable;
 @Builder
 public class PaymentRequestDto implements Serializable {
     private Long requestId;
+    private Long cardId;
+    private String currency;
     private Long shopperId;
     private Long merchantId;
     private Long paymentGatewayId;
