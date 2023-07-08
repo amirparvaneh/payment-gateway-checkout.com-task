@@ -4,11 +4,10 @@ import com.checkout.paymentgateway.dto.merchantDto.MerchantAccountNewDto;
 import com.checkout.paymentgateway.dto.paymentGatewayDto.PaymentRequestDto;
 import com.checkout.paymentgateway.dto.paymentGatewayDto.PaymentResponseDto;
 import com.checkout.paymentgateway.exception.PaymentException;
-import com.checkout.paymentgateway.model.Account;
-import com.checkout.paymentgateway.model.Merchant;
-import com.checkout.paymentgateway.model.Request;
+import com.checkout.paymentgateway.model.*;
 import com.checkout.paymentgateway.repository.AccountRepo;
 import com.checkout.paymentgateway.repository.MerchantRepo;
+import com.checkout.paymentgateway.repository.PaymentRepo;
 import com.checkout.paymentgateway.service.MerchantService;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +19,21 @@ public class MerchantServiceImpl implements MerchantService {
 
     private final MerchantRepo merchantRepo;
     private final AccountRepo accountRepo;
+    private final PaymentService paymentService;
+    private final PaymentGatewayServiceImpl paymentGatewayService;
+    private final CardServiceImpl cardService;
+    private final RequestServiceImpl requestService;
 
-    public MerchantServiceImpl(MerchantRepo merchantRepo, AccountRepo accountRepo){
+    public MerchantServiceImpl(MerchantRepo merchantRepo, AccountRepo accountRepo,PaymentService paymentService,
+                               PaymentGatewayServiceImpl paymentGatewayService,
+                               CardServiceImpl cardService,
+                               RequestServiceImpl requestService){
         this.merchantRepo = merchantRepo;
         this.accountRepo = accountRepo;
+        this.paymentService = paymentService;
+        this.paymentGatewayService = paymentGatewayService;
+        this.cardService = cardService;
+        this.requestService = requestService;
     }
     @Override
     public void save(Merchant merchant) {
@@ -69,11 +79,19 @@ public class MerchantServiceImpl implements MerchantService {
         return account;
     }
 
-    public Long getShopperRequest(){
+    public List<Request> getShopperRequest(){
 
     }
 
-    public PaymentResponseDto sendRequestToPG(PaymentRequestDto paymentRequestDto){
+    public PaymentResponseDto submitRequestToPG(PaymentRequestDto paymentRequestDto) throws PaymentException {
+        PaymentGateway paymentGateway = paymentGatewayService.findById(paymentRequestDto.getPaymentGatewayId());
+        Card card = cardService.findById(paymentRequestDto.getCardId());
+        Request request = requestService.findById(paymentRequestDto.getRequestId());
+
+
+    }
+
+    public PaymentResponseDto retrievePaymentById(Long paymentId){
 
     }
 }

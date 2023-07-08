@@ -1,10 +1,8 @@
 package com.checkout.paymentgateway.dto.paymentGatewayDto;
 
 import com.checkout.paymentgateway.model.PaymentStatus;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -12,4 +10,7 @@ import java.io.Serializable;
 @Builder
 public class PaymentResponseDto implements Serializable {
     private PaymentStatus paymentStatus;
+    private Long price;
+    private String product;
+    private String description;
 }

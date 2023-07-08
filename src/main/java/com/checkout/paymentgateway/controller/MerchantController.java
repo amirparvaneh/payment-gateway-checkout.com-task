@@ -21,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -97,19 +98,30 @@ public class MerchantController {
     }
 
     @GetMapping("/shopper/requests")
-    public List<Request> getShopperRequest(){
-        merchantService.getShopperRequest()
+    public List<Request> getShopperRequest() throws PaymentException {
+        List<Request> requests = merchantService.getShopperRequest();
+        if (requests.size() == 0){
+            throw new PaymentException("there is no request");
+        }
+        return requests;
     }
 
     @PostMapping("/payment/request")
-    public PaymentResponseDto processPayment(@RequestParam PaymentRequestDto paymentRequestDto){
-        PaymentResponseDto paymentResponseDto = merchantService.sendRequestToPG(paymentRequestDto);
-        return
+    public PaymentResponseDto processPayment(@RequestParam PaymentRequestDto paymentRequestDto) throws PaymentException {
+        PaymentResponseDto paymentResponseDto = merchantService.submitRequestToPG(paymentRequestDto);
+        if (Objects.isNull(paymentResponseDto)){
+            throw new PaymentException("there is an error in process payment");
+        }
+        return paymentResponseDto;
     }
 
     @GetMapping("/retrieve/payment")
-    public PaymentResponseDto retrievePayment(@RequestParam Long paymentId){
-
+    public PaymentResponseDto retrievePayment(@RequestParam Long paymentId) throws PaymentException {
+        PaymentResponseDto paymentResponseDto = merchantService.retrievePaymentById(paymentId);
+        if (Objects.isNull(paymentResponseDto)){
+            throw new PaymentException("there is no payment with this id : " + paymentId);
+        }
+        return paymentResponseDto;
     }
 
 }
