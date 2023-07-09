@@ -1,5 +1,8 @@
 package com.checkout.paymentgateway.service.impl;
 
+import com.checkout.paymentgateway.dto.payment.PaymentDto;
+import com.checkout.paymentgateway.dto.paymentGatewayDto.PaymentRequestDto;
+import com.checkout.paymentgateway.dto.paymentGatewayDto.PaymentResponseDto;
 import com.checkout.paymentgateway.model.Payment;
 import com.checkout.paymentgateway.repository.PaymentRepo;
 import org.springframework.stereotype.Service;
@@ -14,7 +17,7 @@ public class PaymentService {
     }
 
 
-    public Payment createPayment(){
+    public PaymentResponseDto createPayment(PaymentDto paymentDto){
 
     }
 
@@ -22,4 +25,8 @@ public class PaymentService {
 
     }
 
+
+    public void sendRequestToBank() {
+
+    }
 }

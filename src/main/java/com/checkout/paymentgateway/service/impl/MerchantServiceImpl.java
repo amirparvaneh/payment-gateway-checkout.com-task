@@ -1,6 +1,7 @@
 package com.checkout.paymentgateway.service.impl;
 
 import com.checkout.paymentgateway.dto.merchantDto.MerchantAccountNewDto;
+import com.checkout.paymentgateway.dto.merchantDto.MerchantCallRequestDto;
 import com.checkout.paymentgateway.dto.paymentGatewayDto.PaymentRequestDto;
 import com.checkout.paymentgateway.dto.paymentGatewayDto.PaymentResponseDto;
 import com.checkout.paymentgateway.exception.PaymentException;
@@ -87,8 +88,13 @@ public class MerchantServiceImpl implements MerchantService {
         PaymentGateway paymentGateway = paymentGatewayService.findById(paymentRequestDto.getPaymentGatewayId());
         Card card = cardService.findById(paymentRequestDto.getCardId());
         Request request = requestService.findById(paymentRequestDto.getRequestId());
-
-
+        MerchantCallRequestDto merchantCallRequestDto = MerchantCallRequestDto.builder()
+                .cvv(card.getCvv())
+                .cardNumber(card.getCardNumber())
+                .expireDate(card.getExpireDate())
+                .amount(request.getPrice())
+                .build();
+        paymentGatewayService.pay(merchantCallRequestDto);
     }
 
     public PaymentResponseDto retrievePaymentById(Long paymentId){
