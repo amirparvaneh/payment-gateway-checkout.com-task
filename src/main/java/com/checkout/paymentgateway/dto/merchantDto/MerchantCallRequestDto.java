@@ -10,10 +10,10 @@ import java.util.Date;
 @Data
 @Builder
 public class MerchantCallRequestDto implements Serializable {
-    private Long price;
+    private Long amount;
     private Long cvv;
     private Long cardNumber;
-    private Date expireDate
-    private Long
-    private Long
+    private Date expireDate;
+    private String currency;
+    private Long merchantId;
 }

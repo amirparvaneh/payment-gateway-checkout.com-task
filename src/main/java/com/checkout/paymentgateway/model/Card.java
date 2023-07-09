@@ -25,7 +25,7 @@ public class Card extends BaseEntity {
     @NotNull(message = "card number should not be empty !")
     @Digits(integer = 4, fraction = 0, message = "the card number should be 4 digits ! ")
     private Long cardNumber;
-    private String cvv;
+    private Long cvv;
     private Date expireDate;
     @ManyToOne
     @JoinColumn(name = "acquiring_bank_id")
